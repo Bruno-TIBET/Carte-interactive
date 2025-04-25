@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Carte Interactive de France - Départements</title>
+    <style>
+        body {
+            margin: 0;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        svg {
+            width: 90%;
+            height: auto;
+        }
+        .region {
+            transition: transform 0.3s, fill 0.3s;
+        }
+        .region:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+        .popup {
+            position: absolute;
+            background: #3498db;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            display: none;
+            pointer-events: none;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="popup" id="popup"></div>
+    <svg viewBox="0 0 200 200" id="carte">
+        <a href="#" onmouseover="showPopup(evt, '75 - Paris')" onclick="alert('Bienvenue à Paris, capitale de l'innovation française !')">
+            <path class="region" d="M90,40 L110,40 L110,60 L90,60 Z" fill="#3498db" />
+        </a>
+        <a href="#" onmouseover="showPopup(evt, '13 - Bouches-du-Rhône')" onclick="alert('Bienvenue dans les Bouches-du-Rhône, terre de culture et de dynamisme !')">
+            <path class="region" d="M70,120 L90,120 L90,140 L70,140 Z" fill="#2ecc71" />
+        </a>
+        <a href="#" onmouseover="showPopup(evt, '33 - Gironde')" onclick="alert('Bienvenue en Gironde, berceau des plus grands vins du monde !')">
+            <path class="region" d="M30,110 L50,110 L50,130 L30,130 Z" fill="#e67e22" />
+        </a>
+    </svg>
+    <script>
+        function showPopup(evt, message) {
+            var popup = document.getElementById('popup');
+            popup.style.left = (evt.pageX + 10) + 'px';
+            popup.style.top = (evt.pageY - 10) + 'px';
+            popup.innerHTML = message;
+            popup.style.display = 'block';
+        }
+        document.getElementById('carte').addEventListener('mouseout', function() {
+            document.getElementById('popup').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
